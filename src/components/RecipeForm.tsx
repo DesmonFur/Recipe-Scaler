@@ -24,9 +24,8 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     if (!ingredientDraft.name.trim()) {
       newErrors.push("Please fill out ingredient name");
     }
-    if (ingredientDraft.amount === 0) {
-      newErrors.push("amount cannot be 0");
-    }
+    if (ingredientDraft.amount <= 0)
+      newErrors.push("Amount must be greater than 0");
     if (!ingredientDraft.unit.trim()) {
       newErrors.push("Unit cannot be empty");
     }
@@ -106,7 +105,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
           id="baseServings"
           type="number"
           value={baseServings}
-          onChange={(e) => setBaseServings(e.target.valueAsNumber)}
+          onChange={(e) => setBaseServings(e.target.valueAsNumber || 1)}
         />
       </div>
       {/* ingredient form */}
@@ -138,9 +137,10 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
           type="number"
           value={ingredientDraft.amount}
           onChange={(e) =>
-            setIngredientDraft((prev) => {
-              return { ...prev, amount: e.target.valueAsNumber };
-            })
+            setIngredientDraft((prev) => ({
+              ...prev,
+              amount: e.target.valueAsNumber || 0,
+            }))
           }
         />
       </div>
@@ -149,6 +149,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
           Ingredient Unit
         </label>
         <select
+          id="ingredientUnit"
           className="bg-slate-600 text-white px-4 py-2 rounded-lg border border-slate-600"
           value={ingredientDraft.unit}
           onChange={(e) =>
