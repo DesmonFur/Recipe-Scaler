@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Recipe, Ingredient } from "../types";
+import { FormField } from "./FormField";
 type RecipeFormProps = {
   onAdd: (recipe: Recipe) => void;
 };
@@ -85,66 +86,48 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
 
       <h2 className="text-3xl font-medium p-2">Recipe Form</h2>
 
-      <div className="flex flex-col gap-2 mb-2.5">
-        <label className="font-medium" htmlFor="recipeName">
-          Recipe Name
-        </label>
-        <input
-          className="bg-slate-600 text-white px-4 py-2 rounded-lg border border-slate-600 focus:border-emerald-500"
-          id="recipeName"
-          type="text"
-          value={recipeName}
-          onChange={(e) => setRecipeName(e.target.value)}
-        />
-      </div>
-      <div className="flex flex-col gap-1 mb-2.5 text-white">
-        <label className="font-medium" htmlFor="baseServings">
-          Base Servings
-        </label>
-        <input
-          className="bg-slate-600 text-white px-4 py-2 rounded-lg border border-slate-600 focus:border-emerald-500"
-          id="baseServings"
-          type="number"
-          value={baseServings}
-          onChange={(e) => setBaseServings(e.target.valueAsNumber || 1)}
-        />
-      </div>
+      <FormField
+        label="Recipe Name"
+        labelId="recipeName"
+        value={recipeName}
+        onChange={(e) => setRecipeName(e.target.value)}
+      ></FormField>
+      <FormField
+        label="Base Servings"
+        labelId="baseServings"
+        type="number"
+        value={baseServings}
+        onChange={(e) => setBaseServings(e.target.valueAsNumber || 1)}
+      ></FormField>
+
       {/* ingredient form */}
       <h3 className="text-3xl font-medium p-2">Ingredient Form</h3>
 
-      <div className="flex flex-col gap-1 mb-2.5 text-white">
-        <label className="font-medium" htmlFor="ingredientName">
-          Ingredient Name
-        </label>
-        <input
-          className="bg-slate-600 text-white px-4 py-2 rounded-lg border border-slate-600 focus:border-emerald-500"
-          id="ingredientName"
-          type="text"
-          value={ingredientDraft.name}
-          onChange={(e) =>
-            setIngredientDraft((prev) => {
-              return { ...prev, name: e.target.value };
-            })
-          }
-        />
-      </div>
-      <div className="flex flex-col gap-1 mb-2.5  text-white">
-        <label className="font-medium" htmlFor="ingredientAmount">
-          Ingredient Amount
-        </label>
-        <input
-          className="bg-slate-600 text-white px-4 py-2 rounded-lg border border-slate-600 focus:border-emerald-500"
-          id="ingredientAmount"
-          type="number"
-          value={ingredientDraft.amount}
-          onChange={(e) =>
-            setIngredientDraft((prev) => ({
-              ...prev,
-              amount: e.target.valueAsNumber || 0,
-            }))
-          }
-        />
-      </div>
+      <FormField
+        label="Ingredient Name"
+        labelId="ingredientName"
+        type="text"
+        value={ingredientDraft.name}
+        onChange={(e) =>
+          setIngredientDraft((prev) => {
+            return { ...prev, name: e.target.value };
+          })
+        }
+      ></FormField>
+
+      <FormField
+        label="Ingredient Amount"
+        labelId="ingredientAmount"
+        type="number"
+        value={ingredientDraft.amount}
+        onChange={(e) =>
+          setIngredientDraft((prev) => ({
+            ...prev,
+            amount: e.target.valueAsNumber || 0,
+          }))
+        }
+      ></FormField>
+
       <div className="flex flex-col gap-1 mb-2.5 text-white ">
         <label className="font-medium" htmlFor="ingredientUnit">
           Ingredient Unit
