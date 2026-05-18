@@ -77,7 +77,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
         <>
           <p className="text-red-500 font-medium">Please fix these errors:</p>
           {error.map((error, i) => (
-            <p key={error[i]} className="text-red-400 text-sm mt-1">
+            <p key={i} className="text-red-400 text-sm mt-1">
               {error}
             </p>
           ))}
