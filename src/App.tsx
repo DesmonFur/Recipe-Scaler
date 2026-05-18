@@ -1,13 +1,22 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
+import { RecipeForm } from "./components/RecipeForm";
+import { RecipeList } from "./components/RecipeList";
 import "./App.css";
-
+import type { Recipe } from "./types";
 function App() {
-  const [count, setCount] = useState(0);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  return <></>;
+  const handleAdd = (newRecipe: Recipe) => {
+    setRecipes((prev) => {
+      return [...prev, newRecipe];
+    });
+  };
+  return (
+    <>
+      <RecipeForm onAdd={handleAdd} />
+      <RecipeList recipes={recipes} />
+    </>
+  );
 }
 
 export default App;
