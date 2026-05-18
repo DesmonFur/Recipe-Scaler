@@ -15,14 +15,24 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     amount: 0,
     unit: "",
   });
+  const [error, setError] = useState<string[]>([]);
 
   const handleAddIngredient = () => {
-    if (!ingredientDraft.name.trim() || !ingredientDraft.unit.trim()) {
-      alert("please check to make sure name or unit is not empty");
-      return;
+    setError([]);
+    const newErrors: string[] = [];
+
+    if (!ingredientDraft.name.trim()) {
+      newErrors.push("Please fill out ingredient name");
     }
-    if (!ingredientDraft.amount) {
-      alert("amount cannot be 0");
+    if (ingredientDraft.amount === 0) {
+      newErrors.push("amount cannot be 0");
+    }
+    if (!ingredientDraft.unit.trim()) {
+      newErrors.push("Unit cannot be empty");
+    }
+
+    if (newErrors.length > 0) {
+      setError(newErrors);
       return;
     }
     setIngredients((prev) => {
@@ -37,15 +47,20 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
   };
 
   const createRecipe = () => {
+    setError([]);
+    const newErrors: string[] = [];
+
     if (!recipeName.trim()) {
-      alert("recipe name cannot be empty");
-      return;
+      newErrors.push("recipe name cannot be empty");
     }
     if (ingredients.length === 0) {
-      alert("Must add ingredients");
-      return;
+      newErrors.push("Must add ingredients");
     }
 
+    if (newErrors.length > 0) {
+      setError(newErrors);
+      return;
+    }
     onAdd({
       id: crypto.randomUUID(),
       name: recipeName,
@@ -58,6 +73,17 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
   };
   return (
     <div className="bg-slate-800 rounded-2xl p-8 w-1/2  mt-2.5 text-white ">
+      {error.length !== 0 && (
+        <>
+          <p className="text-red-500 font-medium">Please fix these errors:</p>
+          {error.map((error, i) => (
+            <p key={error[i]} className="text-red-400 text-sm mt-1">
+              {error}
+            </p>
+          ))}
+        </>
+      )}
+
       <p className="text-3xl font-medium p-2">Recipe Form</p>
       <div className="flex flex-col gap-2 mb-2.5">
         <label className="font-medium" htmlFor="recipeName">
