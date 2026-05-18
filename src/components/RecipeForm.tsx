@@ -83,7 +83,8 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
         </>
       )}
 
-      <p className="text-3xl font-medium p-2">Recipe Form</p>
+      <h2 className="text-3xl font-medium p-2">Recipe Form</h2>
+
       <div className="flex flex-col gap-2 mb-2.5">
         <label className="font-medium" htmlFor="recipeName">
           Recipe Name
@@ -109,7 +110,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
         />
       </div>
       {/* ingredient form */}
-      <p className="text-3xl font-medium p-2">Ingredient Form</p>
+      <h3 className="text-3xl font-medium p-2">Ingredient Form</h3>
 
       <div className="flex flex-col gap-1 mb-2.5 text-white">
         <label className="font-medium" htmlFor="ingredientName">
