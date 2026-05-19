@@ -56,6 +56,9 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     if (ingredients.length === 0) {
       newErrors.push("Must add ingredients");
     }
+    if (baseServings <= 0) {
+      newErrors.push("Base servings must be greater than 0");
+    }
 
     if (newErrors.length > 0) {
       setError(newErrors);
@@ -76,9 +79,9 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
       {error.length !== 0 && (
         <>
           <p className="text-red-500 font-medium">Please fix these errors:</p>
-          {error.map((error, i) => (
-            <p key={i} className="text-red-400 text-sm mt-1">
-              {error}
+          {error.map((err) => (
+            <p key={err} className="text-red-400 text-sm mt-1">
+              {err}
             </p>
           ))}
         </>
@@ -97,7 +100,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
         labelId="baseServings"
         type="number"
         value={baseServings}
-        onChange={(e) => setBaseServings(e.target.valueAsNumber || 1)}
+        onChange={(e) => setBaseServings(e.target.valueAsNumber || 0)}
       ></FormField>
 
       {/* ingredient form */}

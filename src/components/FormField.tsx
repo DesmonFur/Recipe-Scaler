@@ -1,9 +1,10 @@
+import type { ChangeEvent, HTMLInputTypeAttribute } from "react";
 type FormFieldProps = {
   label: string;
   labelId: string;
   value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  type?: HTMLInputTypeAttribute;
 };
 
 export function FormField({
