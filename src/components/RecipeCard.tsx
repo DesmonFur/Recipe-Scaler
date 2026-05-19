@@ -1,6 +1,7 @@
 import type { Recipe } from "../types";
 import { useState } from "react";
 import { calculateScaledAmount } from "../utils/scalingUtils";
+import { formatNumber } from "../utils/formatNumber";
 type RecipeCardProps = {
   recipe: Recipe;
 };
@@ -19,18 +20,23 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
       return 1;
     });
   };
+
+  const scaledIngredientAmount = (ingredientAmount: number): string => {
+    return formatNumber(
+      calculateScaledAmount(
+        ingredientAmount,
+        recipe.baseServings,
+        currentServings,
+      ),
+    );
+  };
   return (
     <div>
       <h3>{recipe.name}</h3>
       <ul>
         {recipe.ingredients.map((ingredient) => (
           <li key={ingredient.id}>
-            {ingredient.name}:{" "}
-            {calculateScaledAmount(
-              ingredient.amount,
-              recipe.baseServings,
-              currentServings,
-            )}
+            {ingredient.name}: {scaledIngredientAmount(ingredient.amount)}{" "}
             {ingredient.unit}
           </li>
         ))}
