@@ -66,6 +66,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     }
     onAdd({
       id: crypto.randomUUID(),
+      imageUrl: "",
       name: recipeName,
       baseServings: baseServings,
       ingredients: ingredients,
@@ -75,7 +76,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     setBaseServings(1);
   };
   return (
-    <div className="bg-slate-800 rounded-2xl p-8 w-1/2  mt-2.5 text-white ">
+    <div className="bg-slate-800 rounded-2xl p-8 w-1/2  mt-2.5 text-white mx-auto ">
       {error.length !== 0 && (
         <>
           <p className="text-red-500 font-medium">Please fix these errors:</p>
