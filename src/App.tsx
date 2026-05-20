@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { RecipeForm } from "./components/RecipeForm";
 import { RecipeList } from "./components/RecipeList";
 import "./App.css";
 import type { Recipe } from "./types";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+
 function App() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useLocalStorage<Recipe[]>("recipes", []);
 
   const handleAdd = (newRecipe: Recipe) => {
-    setRecipes((prev) => {
-      return [...prev, newRecipe];
-    });
+    setRecipes((prev) => [...prev, newRecipe]);
   };
   return (
     <>
