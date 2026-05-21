@@ -57,14 +57,14 @@ export function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
       <hr />
       <div className="flex justify-center gap-4">
         <button
-          className="flex h-12 w-12 items-center justify-center rounded-md bg-red-600 text-2xl font-extrabold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-12 w-12 items-center justify-center rounded-md bg-red-600 text-2xl font-extrabold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
           onClick={decrementServings}
           disabled={currentServings <= 1}
         >
           -
         </button>
         <button
-          className="flex h-12 w-12 items-center justify-center rounded-md bg-emerald-600 text-2xl font-extrabold transition hover:bg-emerald-700"
+          className="flex h-12 w-12 items-center justify-center rounded-md bg-emerald-600 text-2xl font-extrabold transition hover:bg-emerald-700 cursor-pointer"
           onClick={incrementServings}
         >
           +
@@ -77,12 +77,21 @@ export function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
           Current servings: {currentServings}
         </p>
       </div>
-      <button
-        className="mx-6 mb-6 rounded-md bg-red-800 px-4 py-3 text-base font-extrabold transition hover:bg-red-900"
-        onClick={() => onDelete(recipe.id)}
-      >
-        Delete
-      </button>
+      <div>
+        <button
+          className="mx-6 mb-6 rounded-md bg-emerald-600 px-4 py-3 text-base font-extrabold transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+          onClick={() => setCurrentServings(recipe.baseServings)}
+          disabled={currentServings === recipe.baseServings}
+        >
+          Reset
+        </button>
+        <button
+          className="mx-6 mb-6 rounded-md bg-red-800 px-4 py-3 text-base font-extrabold transition hover:bg-red-900 cursor-pointer"
+          onClick={() => onDelete(recipe.id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
