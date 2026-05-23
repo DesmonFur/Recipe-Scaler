@@ -106,12 +106,6 @@ npm run dev
 
 ---
 
-## Screenshots
-
-_Add screenshots here later._
-
----
-
 ## Project Status
 
 Completed as a frontend architecture and React systems practice project.
