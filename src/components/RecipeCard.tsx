@@ -1,5 +1,5 @@
 import type { Recipe } from "../types";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { calculateScaledAmount } from "../utils/scalingUtils";
 import { formatNumber } from "../utils/formatNumber";
 type RecipeCardProps = {
@@ -22,15 +22,18 @@ export function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
     });
   };
 
-  const scaledIngredientAmount = (ingredientAmount: number): string => {
-    return formatNumber(
-      calculateScaledAmount(
-        ingredientAmount,
-        recipe.baseServings,
-        currentServings,
+  const scaledIngredients = useMemo(() => {
+    return recipe.ingredients.map((ingredient) => ({
+      ...ingredient,
+      scaledAmount: formatNumber(
+        calculateScaledAmount(
+          ingredient.amount,
+          recipe.baseServings,
+          currentServings,
+        ),
       ),
-    );
-  };
+    }));
+  }, [recipe.ingredients, recipe.baseServings, currentServings]);
 
   return (
     <div className="flex flex-col  bg-slate-700 text-white gap-5 font-semibold">
@@ -46,10 +49,9 @@ export function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
 
       <h4 className=" px-2 font-bold text-lg text-left ">Ingredients:</h4>
       <ul className="font-semibold text-left px-2 ">
-        {recipe.ingredients.map((ingredient) => (
+        {scaledIngredients.map((ingredient) => (
           <li key={ingredient.id}>
-            {ingredient.name}: {scaledIngredientAmount(ingredient.amount)}{" "}
-            {ingredient.unit}
+            {ingredient.name}: {ingredient.scaledAmount}
           </li>
         ))}
       </ul>
