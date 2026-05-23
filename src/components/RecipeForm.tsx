@@ -76,7 +76,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
     setBaseServings(1);
   };
   return (
-    <div className="bg-slate-800 rounded-2xl p-8 w-1/2  mt-2.5 text-white mx-auto ">
+    <div className="mx-4 mt-5 max-w-2xl rounded-2xl bg-slate-800 p-4 text-white sm:mx-auto sm:p-6 md:p-8">
       {error.length !== 0 && (
         <>
           <p className="text-red-500 font-medium">Please fix these errors:</p>
@@ -153,7 +153,7 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
         </select>
       </div>
 
-      <div className="flex  justify-between mt-2.5">
+      <div className="flex flex-col items-center gap-5  justify-between mt-2.5 md:flex-row ">
         <button
           className="px-4 py-2 rounded-lg bg-emerald-600  text-white font-medium text-sm hover:bg-emerald-500 transition-colors"
           onClick={handleAddIngredient}
