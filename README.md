@@ -1,74 +1,117 @@
-# React + TypeScript + Vite
+# Recipe Scaler
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React + TypeScript recipe scaling application that dynamically adjusts ingredient quantities based on serving size changes.
 
-Currently, two official plugins are available:
+Built as part of a frontend architecture and UI systems sprint focused on React state management, derived data, reusable hooks, responsive layouts, and modern component design patterns.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Dynamic ingredient scaling based on serving count
+- Per-card local serving state
+- Persistent recipes with localStorage
+- Delete recipes
+- Reset servings to base values
+- Responsive recipe card grid
+- Empty state UI handling
+- Formatted ingredient display values
+- Memoized derived ingredient calculations with `useMemo`
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Architecture Highlights
+
+### Local vs Global State Ownership
+
+- `App.tsx` owns the global recipes collection
+- `RecipeCard` owns local UI state for `currentServings`
+- Ingredient scaling is computed as derived render data rather than duplicated state
+
+### Derived Data Patterns
+
+Ingredient amounts are calculated dynamically using utility functions instead of mutating recipe data directly.
+
+The app uses:
+
+- pure utility functions
+- immutable updates
+- memoized transformed collections with `useMemo`
+
+### Reusable Persistence Layer
+
+Recipes persist across refreshes using a reusable generic `useLocalStorage<T>` hook.
+
+---
+
+## UI / Frontend Focus Areas
+
+This project intentionally focused on practical frontend UI patterns including:
+
+- responsive CSS grid layouts
+- Flexbox alignment patterns
+- card-based UI systems
+- spacing hierarchy
+- interactive button states
+- conditional rendering
+- empty-state UX
+- Tailwind utility composition
+
+---
+
+## Learning Objectives
+
+This project was built to strengthen:
+
+- React component architecture
+- prop drilling and callback flow
+- TypeScript prop typing
+- derived state patterns
+- reusable custom hooks
+- memoization concepts
+- responsive frontend design
+- CRUD-style UI interactions
+
+---
+
+## Future Improvements
+
+Potential future enhancements:
+
+- recipe editing
+- ingredient unit pluralization
+- drag-and-drop ingredient ordering
+- backend persistence
+- authentication
+- image uploads
+- server-side storage
+
+---
+
+## Running Locally
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Screenshots
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# Recipe-Scaler
+_Add screenshots here later._
+
+---
+
+## Project Status
+
+Completed as a frontend architecture and React systems practice project.
