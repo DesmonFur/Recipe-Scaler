@@ -13,7 +13,9 @@ export function RecipeList({ recipes, onDelete }: RecipeListProps) {
           <RecipeCard key={recipe.id} recipe={recipe} onDelete={onDelete} />
         ))
       ) : (
-        <p>No recipes added yet. Add your first recipe above. </p>
+        <p className="mx-auto bg-emerald-700 col-span-full place-self-center p-12 text-3xl text-white font-semibold">
+          😋 No recipes added yet. Add your first recipe above.
+        </p>
       )}
     </div>
   );
