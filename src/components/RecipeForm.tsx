@@ -168,18 +168,20 @@ export function RecipeForm({ onAdd }: RecipeFormProps) {
           Create Recipe
         </button>
       </div>
+      {ingredients.length > 0 && (
+        <div className="flex flex-col mt-4">
+          <p className="text-x">Current Ingredients:</p>
 
-      <div className="flex flex-col mt-4">
-        <p className="text-x">Current Ingredients:</p>
-        <ul className="text-white text-xl">
-          {ingredients.map((ingredient) => (
-            <li key={ingredient.id}>
-              {ingredient.name}: {ingredient.amount}
-              {ingredient.unit}
-            </li>
-          ))}
-        </ul>
-      </div>
+          <ul className="text-white text-xl">
+            {ingredients.map((ingredient) => (
+              <li key={ingredient.id}>
+                {ingredient.name}: {ingredient.amount}
+                {ingredient.unit}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
